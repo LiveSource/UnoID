@@ -1,7 +1,8 @@
 package me.unoid.server.github;
 
-import me.unoid.server.URLUtilities;
 import me.unoid.server.unouser.GetUnoUser;
+import me.unoid.server.utilities.JSONUtilities;
+import me.unoid.server.utilities.URLUtilities;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,7 +57,7 @@ public class GithubLogin {
 			JSONObject unoUserJson = GetUnoUser
 					.getByGithubLogin(githubUserLogin);
 
-			String unoUserID = GetUnoUser.getUnoUserID(unoUserJson);
+			String unoUserID = JSONUtilities.getString(unoUserJson, "ID");
 
 			try {
 

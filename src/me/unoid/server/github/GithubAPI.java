@@ -1,6 +1,6 @@
 package me.unoid.server.github;
 
-import me.unoid.server.URLUtilities;
+import me.unoid.server.utilities.URLUtilities;
 
 import org.json.JSONException;
 import org.json.JSONObject;

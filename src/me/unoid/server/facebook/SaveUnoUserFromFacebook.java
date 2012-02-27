@@ -1,8 +1,8 @@
 package me.unoid.server.facebook;
 
 import me.unoid.server.unouser.SaveUnoUser;
+import me.unoid.server.utilities.JSONUtilities;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SaveUnoUserFromFacebook {
@@ -10,17 +10,12 @@ public class SaveUnoUserFromFacebook {
 	public static void save(final JSONObject unoUserJson,
 			final JSONObject facebookMe) {
 
-		String unoUserID = null;
-		try {
-			unoUserID = unoUserJson.getString("ID");
-		} catch (JSONException e) {
-			// e.printStackTrace();
-		}
+		String unoUserID = JSONUtilities.getString(unoUserJson, "ID");
+
+		String facebookLogin = JSONUtilities.getString(unoUserJson,
+				"facebookLogin");
 
 		String email = getValue(unoUserJson, facebookMe, "email", "email");
-
-		String facebookLogin = getValue(unoUserJson, facebookMe,
-				"facebookLogin", "username");
 
 		String image = getImage(unoUserJson, facebookMe, facebookLogin);
 
@@ -50,20 +45,10 @@ public class SaveUnoUserFromFacebook {
 			final JSONObject facebookMe, final String unoUserKey,
 			final String facebookKey) {
 
-		String value = null;
-		try {
-			value = unoUserJson.getString(unoUserKey);
-		} catch (JSONException e) {
-			// e.printStackTrace();
-		}
+		String value = JSONUtilities.getString(unoUserJson, unoUserKey);
 
 		if (value == null) {
-
-			try {
-				value = facebookMe.getString(facebookKey);
-			} catch (JSONException e) {
-				// e.printStackTrace();
-			}
+			value = JSONUtilities.getString(facebookMe, facebookKey);
 		}
 
 		return value;
@@ -72,15 +57,9 @@ public class SaveUnoUserFromFacebook {
 	private static String getImage(final JSONObject unoUserJson,
 			final JSONObject facebookMe, final String facebookLogin) {
 
-		String image = null;
-		try {
-			image = unoUserJson.getString("image");
-		} catch (JSONException e) {
-			// e.printStackTrace();
-		}
+		String image = JSONUtilities.getString(unoUserJson, "image");
 
 		if (image == null) {
-
 			image = "http://graph.facebook.com/" + facebookLogin + "/picture";
 		}
 

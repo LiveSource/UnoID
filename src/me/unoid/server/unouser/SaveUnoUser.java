@@ -1,6 +1,6 @@
 package me.unoid.server.unouser;
 
-import me.unoid.server.URLUtilities;
+import me.unoid.server.utilities.URLUtilities;
 
 public class SaveUnoUser {
 

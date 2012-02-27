@@ -1,6 +1,6 @@
 package me.unoid.server.unouser;
 
-import me.unoid.server.URLUtilities;
+import me.unoid.server.utilities.URLUtilities;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,21 +46,6 @@ public class GetUnoUser {
 				parameters);
 
 		return getUserJson(jsonString);
-
-	}
-
-	public static String getUnoUserID(final JSONObject unoUserJson) {
-
-		String unoUserID = null;
-
-		try {
-			unoUserID = unoUserJson.getString("ID");
-
-		} catch (JSONException e) {
-			// e.printStackTrace();
-		}
-
-		return unoUserID;
 	}
 
 	private static JSONObject getUserJson(String jsonString) {

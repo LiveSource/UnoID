@@ -1,4 +1,4 @@
-package me.unoid.server;
+package me.unoid.server.utilities;
 
 import java.io.BufferedReader;
 import java.io.IOException;

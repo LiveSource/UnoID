@@ -1,11 +1,17 @@
 package me.unoid.server.facebook;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import me.unoid.server.unouser.GetUnoUser;
+import me.unoid.server.utilities.JSONUtilities;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class GetUnoUserFromFacebook {
+
+	private static Logger logger = Logger.getLogger("UnoIDMe");
 
 	public static String get(final String authenticationToken) {
 
@@ -18,49 +24,57 @@ public class GetUnoUserFromFacebook {
 
 	private static String saveUnoUser(JSONObject facebookMe) {
 
-		String facebookLogin = null;
-		try {
-			facebookLogin = facebookMe.getString("username");
-		} catch (JSONException e) {
-			// e.printStackTrace();
-		}
-
-		String email = null;
-		try {
-			email = facebookMe.getString("email");
-		} catch (JSONException e) {
-			// e.printStackTrace();
+		String facebookLogin = JSONUtilities.getString(facebookMe, "username");
+		if (facebookLogin == null) {
+			facebookLogin = JSONUtilities.getString(facebookMe, "id");
 		}
 
 		JSONObject unoUserJson = GetUnoUser.getByFacebookLogin(facebookLogin);
 
+		String email = JSONUtilities.getString(facebookMe, "email");
+
 		if (unoUserJson == null) {
 
 			unoUserJson = GetUnoUser.getByEmail(email);
+			if (unoUserJson != null
+					&& JSONUtilities.getString(unoUserJson, "facebookLogin") == null) {
+				try {
+					unoUserJson.put("facebookLogin", facebookLogin);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 		if (unoUserJson == null) {
 
-			String unoUserID = "FB_" + facebookLogin;
+			String unoUserID = email;
+			if (email == null) {
+				unoUserID = "FB_" + facebookLogin;
+			}
 
-			unoUserJson = createUnoUser(unoUserID);
+			unoUserJson = createUnoUser(unoUserID, facebookLogin, email);
 		}
+
+		logger.log(Level.INFO, "unoUserJson=" + unoUserJson);
 
 		SaveUnoUserFromFacebook.save(unoUserJson, facebookMe);
 
-		return GetUnoUser.getUnoUserID(unoUserJson);
+		return JSONUtilities.getString(unoUserJson, "ID");
 	}
 
-	private static JSONObject createUnoUser(final String unoUserID) {
+	private static JSONObject createUnoUser(final String unoUserID,
+			final String facebookLogin, final String email) {
 
 		JSONObject jsonObject = new JSONObject();
 
 		try {
 
 			jsonObject.put("ID", unoUserID);
+			jsonObject.put("facebookLogin", facebookLogin);
+			jsonObject.put("email", email);
 
 		} catch (JSONException e) {
-
 			// e.printStackTrace();
 		}
 
