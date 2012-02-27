@@ -1,7 +1,8 @@
 package me.unoid.client.github;
 
-import me.unoid.client.LoginService;
-import me.unoid.client.LoginServiceAsync;
+import me.unoid.client.login.LoginService;
+import me.unoid.client.login.LoginServiceAsync;
+import me.unoid.client.login.SetLoggedIn;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;

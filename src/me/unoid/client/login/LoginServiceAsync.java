@@ -1,4 +1,4 @@
-package me.unoid.client;
+package me.unoid.client.login;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

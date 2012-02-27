@@ -9,8 +9,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class URLUtilities {
+
+	private static Logger logger = Logger.getLogger("UnoIDMe");
 
 	public static String encode(final String text) {
 		try {
@@ -21,9 +25,14 @@ public class URLUtilities {
 	}
 
 	public static String fetchURLGet(final String u, String parameters) {
+
 		String returnedString = "";
 		try {
+
 			final URL url = new URL(u + "?" + parameters);
+
+			// logger.log(Level.INFO, "fetchURLGet=" + url);
+
 			final BufferedReader reader = new BufferedReader(
 					new InputStreamReader(url.openStream()));
 			String line;
@@ -41,8 +50,10 @@ public class URLUtilities {
 	}
 
 	public static String fetchURLPost(final String u, String parameters) {
+
 		String returnedString = "";
 		try {
+
 			final URL url = new URL(u);
 			HttpURLConnection connection = (HttpURLConnection) url
 					.openConnection();
@@ -61,14 +72,19 @@ public class URLUtilities {
 				}
 				reader.close();
 			} else {
-				System.out.println(connection.getResponseCode());
+				System.out.println(connection.getResponseMessage());
+				logger.log(Level.INFO, "connection.getResponseMessage()="
+						+ connection.getResponseMessage());
 			}
 		} catch (final MalformedURLException e) {
 			System.out.println("MalformedURLException calling url" + u
 					+ e.getMessage());
+			logger.log(Level.INFO, "e.getMessage()=" + e.getMessage());
 		} catch (final IOException e) {
 			System.out.println("IOException calling url" + u + e.getMessage());
+			logger.log(Level.INFO, "e.getMessage()=" + e.getMessage());
 		}
+
 		return returnedString;
 	}
 }

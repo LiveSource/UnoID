@@ -1,6 +1,6 @@
 package me.unoid.server;
 
-import me.unoid.client.LoginService;
+import me.unoid.client.login.LoginService;
 import me.unoid.server.facebook.FacebookLogin;
 import me.unoid.server.github.GithubLogin;
 
@@ -13,7 +13,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 
 	public String facebookLogin(final String authenticationCode) {
 
-		return FacebookLogin.log(authenticationCode).toString();
+		return FacebookLogin.login(authenticationCode).toString();
 	}
 
 	public String githubLogin(final String authenticationCode) {

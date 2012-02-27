@@ -1,11 +1,15 @@
 package me.unoid.server.facebook;
 
+import java.util.logging.Logger;
+
 import me.unoid.server.URLUtilities;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FacebookAPI {
+
+	private static Logger logger = Logger.getLogger("facebook");
 
 	private static final String userURL = "https://graph.facebook.com/me";
 
@@ -14,6 +18,8 @@ public class FacebookAPI {
 		JSONObject json = new JSONObject();
 
 		final String jsonString = URLUtilities.fetchURLGet(userURL, authToken);
+
+		// logger.log(Level.INFO, "faceboookMejsonString=" + jsonString);
 
 		try {
 			json = new JSONObject(jsonString);

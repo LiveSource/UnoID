@@ -1,4 +1,4 @@
-package me.unoid.client.github;
+package me.unoid.client.login;
 
 import me.unoid.client.Utilities.ConvertJson;
 import me.unoid.client.Utilities.EncryptText;

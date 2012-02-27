@@ -1,7 +1,7 @@
 package me.unoid.server.github;
 
 import me.unoid.server.URLUtilities;
-import me.unoid.server.livesource.GetLiveSourceUserAPI;
+import me.unoid.server.unouser.GetUnoUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,8 +53,10 @@ public class GithubLogin {
 				e1.printStackTrace();
 			}
 
-			String livesourceUser = GetLiveSourceUserAPI
-					.getLivesourceUser(githubUserLogin);
+			JSONObject unoUserJson = GetUnoUser
+					.getByGithubLogin(githubUserLogin);
+
+			String unoUserID = GetUnoUser.getUnoUserID(unoUserJson);
 
 			try {
 
@@ -64,7 +66,7 @@ public class GithubLogin {
 
 				json.put("githubUserName", githubUserName);
 
-				json.put("livesourceUser", livesourceUser);
+				json.put("UnoUserID", unoUserID);
 
 			} catch (JSONException e) {
 

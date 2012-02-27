@@ -1,9 +1,8 @@
 package me.unoid.client;
 
 import me.unoid.client.facebook.FacebookLoginVerifyer;
-import me.unoid.client.facebook.LoginWithFacebookButton;
 import me.unoid.client.github.GithubLoginVerifyer;
-import me.unoid.client.github.LoginGithubButton;
+import me.unoid.client.login.LoginButtons;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window.Location;
@@ -22,14 +21,13 @@ public class GWTEntryPoint implements EntryPoint {
 	public void onModuleLoad() {
 
 		final String authenticationCode = Location.getParameter("code");
+
 		final String error = Location.getParameter("error_reason");
 
 		if ((null != error && error.equals("user_denied"))
 				|| (authenticationCode == null || "".equals(authenticationCode))) {
 
-			RootPanel.get().add(new LoginWithFacebookButton());
-
-			RootPanel.get().add(new LoginGithubButton());
+			RootPanel.get().add(new LoginButtons());
 
 		} else {
 
