@@ -10,6 +10,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -18,10 +19,17 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class GWTEntryPoint implements EntryPoint {
 
+	public static VerticalPanel vpMain = new VerticalPanel();
+
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		
+		//Cookies.setCookie("UnoUserID",
+			//	EncryptText.encrypt("alline.oliveira@gmail.com"));
+
+		RootPanel.get().add(vpMain);
 
 		String unoUserID = EncryptText.decrypt(Cookies.getCookie("UnoUserID"));
 
@@ -35,7 +43,7 @@ public class GWTEntryPoint implements EntryPoint {
 					|| (authenticationCode == null || ""
 							.equals(authenticationCode))) {
 
-				RootPanel.get().add(new LoginButtons());
+				vpMain.add(new LoginButtons());
 
 			} else {
 

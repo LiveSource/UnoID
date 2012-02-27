@@ -10,4 +10,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface UnoIDService extends RemoteService {
 	
 	String getUnoUser(final String unoUserID);
+	
+	void saveUnoUser(final String unoUserJsonString);
 }

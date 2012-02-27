@@ -3,6 +3,7 @@ package me.unoid.server.facebook;
 import me.unoid.server.unouser.SaveUnoUser;
 import me.unoid.server.utilities.JSONUtilities;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SaveUnoUserFromFacebook {
@@ -10,38 +11,29 @@ public class SaveUnoUserFromFacebook {
 	public static void save(final JSONObject unoUserJson,
 			final JSONObject facebookMe) {
 
-		String unoUserID = JSONUtilities.getString(unoUserJson, "ID");
+		updateValue(unoUserJson, facebookMe, "email", "email");
 
-		String facebookLogin = JSONUtilities.getString(unoUserJson,
-				"facebookLogin");
+		updateImage(unoUserJson, facebookMe);
 
-		String email = getValue(unoUserJson, facebookMe, "email", "email");
+		updateValue(unoUserJson, facebookMe, "firstName", "first_name");
 
-		String image = getImage(unoUserJson, facebookMe, facebookLogin);
+		updateValue(unoUserJson, facebookMe, "lastName", "last_name");
 
-		String firstName = getValue(unoUserJson, facebookMe, "firstName",
-				"first_name");
+		updateValue(unoUserJson, facebookMe, "gender", "gender");
 
-		String lastName = getValue(unoUserJson, facebookMe, "lastName",
-				"last_name");
+		updateValue(unoUserJson, facebookMe, "birthday", "birthday");
 
-		String gender = getValue(unoUserJson, facebookMe, "gender", "gender");
-
-		String birthday = getValue(unoUserJson, facebookMe, "birthday",
-				"birthday");
-
-		String maritalStatus = getValue(unoUserJson, facebookMe,
-				"maritalStatus", "relationship_status");
+		updateValue(unoUserJson, facebookMe, "maritalStatus",
+				"relationship_status");
 
 		// JSONObject hometown = facebookMe.getJSONObject("hometown");
 		// String image = facebookMe.getString("id");
 
-		SaveUnoUser.save(unoUserID, email, facebookLogin, image, firstName,
-				lastName, gender, birthday, maritalStatus, null);
+		SaveUnoUser.save(unoUserJson);
 
 	}
 
-	private static String getValue(final JSONObject unoUserJson,
+	private static void updateValue(JSONObject unoUserJson,
 			final JSONObject facebookMe, final String unoUserKey,
 			final String facebookKey) {
 
@@ -49,20 +41,32 @@ public class SaveUnoUserFromFacebook {
 
 		if (value == null) {
 			value = JSONUtilities.getString(facebookMe, facebookKey);
-		}
 
-		return value;
+			try {
+				unoUserJson.put(unoUserKey, value);
+			} catch (JSONException e) {
+				// e.printStackTrace();
+			}
+		}
 	}
 
-	private static String getImage(final JSONObject unoUserJson,
-			final JSONObject facebookMe, final String facebookLogin) {
+	private static void updateImage(final JSONObject unoUserJson,
+			final JSONObject facebookMe) {
 
 		String image = JSONUtilities.getString(unoUserJson, "image");
 
 		if (image == null) {
-			image = "http://graph.facebook.com/" + facebookLogin + "/picture";
-		}
 
-		return image;
+			String facebookLogin = JSONUtilities.getString(unoUserJson,
+					"facebookLogin");
+
+			image = "http://graph.facebook.com/" + facebookLogin + "/picture";
+
+			try {
+				unoUserJson.put("image", image);
+			} catch (JSONException e) {
+				// e.printStackTrace();
+			}
+		}
 	}
 }

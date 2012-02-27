@@ -8,4 +8,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface UnoIDServiceAsync {
 
 	void getUnoUser(String unoUserID, AsyncCallback<String> callback);
+
+	void saveUnoUser(String unoUserJsonString, AsyncCallback<Void> callback);
 }

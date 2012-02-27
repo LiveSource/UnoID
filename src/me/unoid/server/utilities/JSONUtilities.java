@@ -11,7 +11,7 @@ public class JSONUtilities {
 		try {
 			value = json.getString(key);
 		} catch (JSONException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return value;
 	}
