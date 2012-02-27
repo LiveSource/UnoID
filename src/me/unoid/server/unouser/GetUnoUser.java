@@ -65,7 +65,7 @@ public class GetUnoUser {
 
 	private static JSONObject getUserJson(String jsonString) {
 
-		JSONObject userJsonObject = new JSONObject();
+		JSONObject userJsonObject = null;
 
 		if (jsonString != null && !jsonString.equals("")) {
 

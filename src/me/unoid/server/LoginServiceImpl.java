@@ -13,7 +13,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements
 
 	public String facebookLogin(final String authenticationCode) {
 
-		return FacebookLogin.login(authenticationCode).toString();
+		return FacebookLogin.login(authenticationCode);
 	}
 
 	public String githubLogin(final String authenticationCode) {

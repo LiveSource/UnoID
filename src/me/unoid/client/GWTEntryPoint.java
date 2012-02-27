@@ -1,10 +1,13 @@
 package me.unoid.client;
 
-import me.unoid.client.facebook.FacebookLoginVerifyer;
-import me.unoid.client.github.GithubLoginVerifyer;
+import me.unoid.client.Utilities.EncryptText;
 import me.unoid.client.login.LoginButtons;
+import me.unoid.client.login.facebook.FacebookLoginVerifyer;
+import me.unoid.client.login.github.GithubLoginVerifyer;
+import me.unoid.client.me.GetUnoUser;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -20,27 +23,37 @@ public class GWTEntryPoint implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 
-		final String authenticationCode = Location.getParameter("code");
+		String unoUserID = EncryptText.decrypt(Cookies.getCookie("UnoUserID"));
 
-		final String error = Location.getParameter("error_reason");
+		if (unoUserID == null || unoUserID.equals("null")) {
 
-		if ((null != error && error.equals("user_denied"))
-				|| (authenticationCode == null || "".equals(authenticationCode))) {
+			final String authenticationCode = Location.getParameter("code");
 
-			RootPanel.get().add(new LoginButtons());
+			final String error = Location.getParameter("error_reason");
 
-		} else {
+			if ((null != error && error.equals("user_denied"))
+					|| (authenticationCode == null || ""
+							.equals(authenticationCode))) {
 
-			final String loginApp = Location.getParameter("login");
-
-			if ("github".equals(loginApp)) {
-
-				GithubLoginVerifyer.authenticate(authenticationCode);
+				RootPanel.get().add(new LoginButtons());
 
 			} else {
 
-				FacebookLoginVerifyer.authenticate(authenticationCode);
+				final String loginApp = Location.getParameter("login");
+
+				if ("github".equals(loginApp)) {
+
+					GithubLoginVerifyer.authenticate(authenticationCode);
+
+				} else {
+
+					FacebookLoginVerifyer.authenticate(authenticationCode);
+				}
 			}
+
+		} else {
+
+			GetUnoUser.get(unoUserID);
 		}
 	}
 }

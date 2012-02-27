@@ -1,4 +1,4 @@
-package me.unoid.client.facebook;
+package me.unoid.client.login.facebook;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -7,12 +7,11 @@ import com.google.gwt.user.client.ui.Image;
 
 public class LoginWithFacebookButton extends Image {
 
-	// private static final String livesourceFacebookID = "194243253971053";
-	private static final String livesourceFacebookID = "158550007562379"; // _localhost
+	private static final String livesourceFacebookID = "194243253971053";
+	//private static final String livesourceFacebookID = "158550007562379"; // _localhost
 
-	// private static final String REDIRECT_URL =
-	// "http://1.unoidme.appspot.com/";
-	private static final String REDIRECT_URL = "http://localhost:8080/unoid/"; // localhost
+	private static final String REDIRECT_URL = "http://unoidme.appspot.com/";
+	//private static final String REDIRECT_URL = "http://localhost:8080/unoid/"; // localhost
 
 	public LoginWithFacebookButton() {
 

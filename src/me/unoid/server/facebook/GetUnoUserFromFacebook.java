@@ -5,18 +5,18 @@ import me.unoid.server.unouser.GetUnoUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class GetUnoUserIDFromFacebook {
+public class GetUnoUserFromFacebook {
 
 	public static String get(final String authenticationToken) {
 
 		JSONObject facebookMe = FacebookAPI.me(authenticationToken);
 
-		String unoUserID = getUnoUserIDFromFacebook(facebookMe);
+		String unoUserID = saveUnoUser(facebookMe);
 
 		return unoUserID;
 	}
 
-	private static String getUnoUserIDFromFacebook(JSONObject facebookMe) {
+	private static String saveUnoUser(JSONObject facebookMe) {
 
 		String facebookLogin = null;
 		try {
@@ -34,25 +34,21 @@ public class GetUnoUserIDFromFacebook {
 
 		JSONObject unoUserJson = GetUnoUser.getByFacebookLogin(facebookLogin);
 
-		String unoUserID = GetUnoUser.getUnoUserID(unoUserJson);
-
-		if (unoUserID == null) {
+		if (unoUserJson == null) {
 
 			unoUserJson = GetUnoUser.getByEmail(email);
-
-			unoUserID = GetUnoUser.getUnoUserID(unoUserJson);
 		}
 
-		if (unoUserID == null) {
+		if (unoUserJson == null) {
 
-			unoUserID = "FB_" + facebookLogin;
+			String unoUserID = "FB_" + facebookLogin;
 
 			unoUserJson = createUnoUser(unoUserID);
 		}
 
 		SaveUnoUserFromFacebook.save(unoUserJson, facebookMe);
 
-		return unoUserID;
+		return GetUnoUser.getUnoUserID(unoUserJson);
 	}
 
 	private static JSONObject createUnoUser(final String unoUserID) {

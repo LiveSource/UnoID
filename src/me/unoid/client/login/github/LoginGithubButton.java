@@ -1,4 +1,4 @@
-package me.unoid.client.github;
+package me.unoid.client.login.github;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

@@ -1,7 +1,7 @@
 package me.unoid.client.login;
 
-import me.unoid.client.facebook.LoginWithFacebookButton;
-import me.unoid.client.github.LoginGithubButton;
+import me.unoid.client.login.facebook.LoginWithFacebookButton;
+import me.unoid.client.login.github.LoginGithubButton;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
 
