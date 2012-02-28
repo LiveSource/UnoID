@@ -1,6 +1,5 @@
 package me.unoid.server.facebook;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import me.unoid.server.unouser.GetUnoUser;
@@ -17,9 +16,9 @@ public class GetUnoUserFromFacebook {
 
 		JSONObject facebookMe = FacebookAPI.me(authenticationToken);
 
-		String unoUserID = saveUnoUser(facebookMe);
+		String unoUser = saveUnoUser(facebookMe);
 
-		return unoUserID;
+		return unoUser;
 	}
 
 	private static String saveUnoUser(JSONObject facebookMe) {
@@ -56,11 +55,11 @@ public class GetUnoUserFromFacebook {
 			unoUserJson = createUnoUser(unoUserID, facebookLogin, email);
 		}
 
-		logger.log(Level.INFO, "unoUserJson=" + unoUserJson);
+		//logger.log(Level.INFO, "unoUserJson=" + unoUserJson);
 
 		SaveUnoUserFromFacebook.save(unoUserJson, facebookMe);
 
-		return JSONUtilities.getString(unoUserJson, "ID");
+		return unoUserJson.toString();
 	}
 
 	private static JSONObject createUnoUser(final String unoUserID,

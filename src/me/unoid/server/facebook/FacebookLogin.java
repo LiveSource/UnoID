@@ -6,17 +6,18 @@ public class FacebookLogin {
 
 	private static final String Facebook_OAUTH_URL = "https://graph.facebook.com/oauth/access_token";
 
-	private static final String SECRET_LiveSource_facebook = "5a2a037588b453a3df4058c836850da1"; // Testing
-	private static final String APPLICATION_ID_LiveSource_Facebook = "158550007562379"; // Testing
-	//private static final String SECRET_LiveSource_facebook = "110a3c23f4c80ac47ddcc5c9fd9fb032";
-	//private static final String APPLICATION_ID_LiveSource_Facebook = "194243253971053";
+	//private static final String SECRET_LiveSource_facebook = "5a2a037588b453a3df4058c836850da1"; // Testing
+	//private static final String APPLICATION_ID_LiveSource_Facebook = "158550007562379"; // Testing
+	private static final String SECRET_LiveSource_facebook = "110a3c23f4c80ac47ddcc5c9fd9fb032";
+	private static final String APPLICATION_ID_LiveSource_Facebook = "194243253971053";
 
-	private static final String REDIRECT_URL = "http://localhost:8080/unoid/"; // Testing
-	//private static final String REDIRECT_URL ="http://unoidme.appspot.com/";
+	//private static final String REDIRECT_URL = "http://localhost:8080/xleanbiz/"; // Testing
+	// private static final String REDIRECT_URL ="http://unoidme.appspot.com/";
+	private static final String REDIRECT_URL = "http://xlean.biz";
 
 	public static String login(final String authenticationCode) {
 
-		String unoUserID = null;
+		String unoUser = null;
 
 		final String parameters = getAccessTokenUrl(authenticationCode);
 
@@ -26,10 +27,10 @@ public class FacebookLogin {
 		if (authenticationToken != null
 				&& authenticationToken.contains("access_token=")) {
 
-			unoUserID = GetUnoUserFromFacebook.get(authenticationToken);
+			unoUser = GetUnoUserFromFacebook.get(authenticationToken);
 		}
 
-		return unoUserID;
+		return unoUser;
 	}
 
 	private static String getAccessTokenUrl(final String authCode) {

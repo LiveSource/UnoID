@@ -25,15 +25,15 @@ public class GWTEntryPoint implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		
-		//Cookies.setCookie("UnoUserID",
-			//	EncryptText.encrypt("alline.oliveira@gmail.com"));
+
+		// Cookies.setCookie("UnoUser",
+		// EncryptText.encrypt(UnoUserTest.unoUserJsonString()));
 
 		RootPanel.get().add(vpMain);
 
-		String unoUserID = EncryptText.decrypt(Cookies.getCookie("UnoUserID"));
+		String unoUser = EncryptText.decrypt(Cookies.getCookie("UnoUser"));
 
-		if (unoUserID == null || unoUserID.equals("null")) {
+		if (unoUser == null || unoUser.equals("null")) {
 
 			final String authenticationCode = Location.getParameter("code");
 
@@ -61,7 +61,7 @@ public class GWTEntryPoint implements EntryPoint {
 
 		} else {
 
-			GetUnoUser.get(unoUserID);
+			GetUnoUser.get(unoUser);
 		}
 	}
 }

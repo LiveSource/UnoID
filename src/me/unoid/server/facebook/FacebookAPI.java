@@ -1,5 +1,7 @@
 package me.unoid.server.facebook;
 
+import java.util.logging.Logger;
+
 import me.unoid.server.utilities.URLUtilities;
 
 import org.json.JSONException;
@@ -7,7 +9,7 @@ import org.json.JSONObject;
 
 public class FacebookAPI {
 
-	//private static Logger logger = Logger.getLogger("facebook");
+	private static Logger logger = Logger.getLogger("facebook");
 
 	private static final String userURL = "https://graph.facebook.com/me";
 

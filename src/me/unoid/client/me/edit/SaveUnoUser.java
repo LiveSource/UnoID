@@ -1,7 +1,5 @@
 package me.unoid.client.me.edit;
 
-import me.unoid.client.GWTEntryPoint;
-import me.unoid.client.me.MyPanel;
 import me.unoid.client.me.UnoIDService;
 import me.unoid.client.me.UnoIDServiceAsync;
 
@@ -26,9 +24,6 @@ public class SaveUnoUser {
 
 				JSONObject obj = (JSONObject) JSONParser
 						.parseStrict(unoUserJsonString);
-
-				GWTEntryPoint.vpMain.clear();
-				GWTEntryPoint.vpMain.add(new MyPanel(obj));
 			}
 		});
 
