@@ -38,7 +38,11 @@ public class FacebookLoginVerifyer {
 
 							Cookies.setCookie("UnoUser",
 									EncryptText.encrypt(unoUserJsonString));
+							
+							String unoUser = EncryptText.decrypt(Cookies.getCookie("UnoUser"));
 
+							logger.log(Level.INFO, "unoUserCookie=" + unoUser);
+							
 							// GetUnoUser.get(unoUserJsonString);
 						}
 					});

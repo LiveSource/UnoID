@@ -73,16 +73,19 @@ public class URLUtilities {
 				reader.close();
 			} else {
 				System.out.println(connection.getResponseMessage());
-				logger.log(Level.INFO, "connection.getResponseMessage()="
-						+ connection.getResponseMessage());
+				logger.log(Level.INFO, "connection.getResponseMessage()=" + u
+						+ parameters + connection.getResponseMessage());
+				returnedString += connection.getResponseMessage();
 			}
 		} catch (final MalformedURLException e) {
 			System.out.println("MalformedURLException calling url" + u
 					+ e.getMessage());
 			logger.log(Level.INFO, "e.getMessage()=" + e.getMessage());
+			returnedString += u + parameters + e.getMessage();
 		} catch (final IOException e) {
 			System.out.println("IOException calling url" + u + e.getMessage());
 			logger.log(Level.INFO, "e.getMessage()=" + e.getMessage());
+			returnedString += u + parameters + e.getMessage();
 		}
 
 		return returnedString;
