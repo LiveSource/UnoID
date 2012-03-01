@@ -75,7 +75,8 @@ public class URLUtilities {
 				System.out.println(connection.getResponseMessage());
 				logger.log(Level.INFO, "connection.getResponseMessage()=" + u
 						+ parameters + connection.getResponseMessage());
-				returnedString += connection.getResponseMessage();
+				returnedString += "erro:" + u + parameters
+						+ connection.getResponseCode();
 			}
 		} catch (final MalformedURLException e) {
 			System.out.println("MalformedURLException calling url" + u

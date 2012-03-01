@@ -21,8 +21,6 @@ public class FacebookLoginVerifyer {
 
 		if (!(authenticationCode == null || "".equals(authenticationCode))) {
 
-			logger.log(Level.INFO, "authenticationCode=" + authenticationCode);
-
 			loginService.facebookLogin(authenticationCode,
 					new AsyncCallback<String>() {
 
@@ -33,16 +31,10 @@ public class FacebookLoginVerifyer {
 						}
 
 						public void onSuccess(final String unoUserJsonString) {
-							
-							logger.log(Level.INFO, "unoUserJsonString=" + unoUserJsonString);
 
 							Cookies.setCookie("UnoUser",
 									EncryptText.encrypt(unoUserJsonString));
-							
-							String unoUser = EncryptText.decrypt(Cookies.getCookie("UnoUser"));
 
-							logger.log(Level.INFO, "unoUserCookie=" + unoUser);
-							
 							// GetUnoUser.get(unoUserJsonString);
 						}
 					});

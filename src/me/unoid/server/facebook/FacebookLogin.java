@@ -13,7 +13,7 @@ public class FacebookLogin {
 
 	//private static final String REDIRECT_URL = "http://localhost:8080/xleanbiz/"; // Testing
 	// private static final String REDIRECT_URL ="http://unoidme.appspot.com/";
-	private static final String REDIRECT_URL = "http://xlean.biz";
+	private static final String REDIRECT_URL = "http://www.xlean.biz/";
 
 	public static String login(final String authenticationCode) {
 

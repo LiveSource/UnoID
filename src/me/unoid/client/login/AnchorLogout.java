@@ -20,7 +20,7 @@ public class AnchorLogout extends HTML {
 
 				Cookies.setCookie("githubAuthenticationToken", null);
 				Cookies.setCookie("githubUserLogin", null);
-				Cookies.setCookie("UnoUserID", null);
+				Cookies.setCookie("UnoUser", null);
 
 				Window.Location.assign(GWT.getHostPageBaseURL());
 			}
