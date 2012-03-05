@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Image;
 
+
 public class LoginWithFacebookButton extends Image {
 
 	private static final String livesourceFacebookID = "194243253971053";
@@ -14,12 +15,12 @@ public class LoginWithFacebookButton extends Image {
 	//private static final String REDIRECT_URL = "http://localhost:8080/xleanbiz/"; // localhost
 	private static final String REDIRECT_URL = "http://www.xlean.biz/";
 
-	public LoginWithFacebookButton() {
+	public LoginWithFacebookButton() {  
 
 		this.setUrl(GWT.getModuleName()
 				+ "/authentication/images/FacebookLogin.png");
 
-		this.addClickHandler(new ClickHandler() {
+		this.addClickHandler(new ClickHandler() { 
 
 			@Override
 			public void onClick(ClickEvent event) {
