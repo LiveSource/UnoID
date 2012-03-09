@@ -25,6 +25,8 @@ public class LoginWithFacebookButton extends Image {
 			@Override
 			public void onClick(ClickEvent event) {
 
+				FacebookLoginPanel.hpFacebookLogin.clear();
+
 				redirect(getAuthorizeUrl());
 			}
 		});
