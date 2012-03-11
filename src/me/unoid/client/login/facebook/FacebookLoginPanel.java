@@ -14,10 +14,13 @@ public class FacebookLoginPanel {
 
 	public static void setPanel() {
 
+		hpFacebookLogin.setWidth("200px");
 		hpFacebookLogin.setSpacing(5);
 		hpFacebookLogin.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 
 		if (UnoIDGlobalVariables.unoUser == null) {
+
+			hpFacebookLogin.clear();
 
 			hpFacebookLogin.add(new LoginWithFacebookButton());
 
@@ -28,6 +31,8 @@ public class FacebookLoginPanel {
 	}
 
 	public static void setLoggedUser() {
+
+		hpFacebookLogin.clear();
 
 		hpFacebookLogin.add(new MyPhoto(UnoIDGlobalVariables.unoUser));
 
